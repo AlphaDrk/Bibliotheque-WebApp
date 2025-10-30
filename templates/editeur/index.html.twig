@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Éditeurs{% endblock %}
+
+{% block body %}
+{{ include('components/page_header.html.twig', {
+    'title': 'Gestion des Éditeurs',
+    'breadcrumb': [
+        {'label': 'Éditeurs'}
+    ],
+    'actions': [
+        {
+            'url': path('app_editeur_new'),
+            'class': 'btn-gradient',
+            'icon': 'bi-building-add',
+            'label': 'Nouvel Éditeur'
+        }
+    ]
+}) }}
+
+<!-- Stats Overview -->
+<div class="stats-grid mb-4">
+    {{ include('components/stat_card.html.twig', {
+        'value': editeurs|length,
+        'label': 'Total Éditeurs',
+        'icon': 'bi-building',
+        'icon_color': '#667eea'
+    }) }}
+</div>
+
+<!-- Publishers Table -->
+<div class="card-modern">
+    {{ include('components/card_header.html.twig', {
+        'icon': 'bi-list',
+        'title': 'Liste des Éditeurs',
+        'actions': [
+            {'type': 'button', 'icon': 'bi-funnel', 'title': 'Filtrer'},
+            {'type': 'button', 'icon': 'bi-download', 'title': 'Exporter'}
+        ]
+    }) }}
+    <div class="card-body-modern">
+        {% if editeurs|length > 0 %}
+            <div class="table-responsive">
+                <table class="table-modern">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ÉDITEUR</th>
+                            <th>PAYS</th>
+                            <th>ADRESSE</th>
+                            <th>TÉLÉPHONE</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for editeur in editeurs %}
+                            <tr>
+                                <td>
+                                    <code style="background: #f7f9fc; padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; color: #667eea;">
+                                        #{{ editeur.id }}
+                                    </code>
+                                </td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #f093fb, #f5576c); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                                            <i class="bi bi-building"></i>
+                                        </div>
+                                        <div>
+                                            <div style="font-weight: 600; color: #1a1d2e;">{{ editeur.nom }}</div>
+                                            <div style="font-size: 0.85rem; color: #8f9bb3;">Maison d'édition</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge-modern" style="background: rgba(79, 172, 254, 0.1); color: #4facfe;">
+                                        {{ editeur.pays }}
+                                    </span>
+                                </td>
+                                <td style="color: #8f9bb3;">
+                                    {{ editeur.adresse }}
+                                </td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 8px; color: #1a1d2e;">
+                                        <i class="bi bi-telephone" style="color: #667eea;"></i>
+                                        <span style="font-weight: 500;">{{ editeur.telephone }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ include('components/action_buttons.html.twig', {
+                                        'actions': [
+                                            {
+                                                'url': path('app_editeur_show', {'id': editeur.id}),
+                                                'icon': 'bi-eye',
+                                                'title': 'Voir les détails'
+                                            },
+                                            {
+                                                'url': path('app_editeur_edit', {'id': editeur.id}),
+                                                'icon': 'bi-pencil',
+                                                'title': 'Modifier'
+                                            }
+                                        ]
+                                    }) }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            {{ include('components/empty_state.html.twig', {
+                'icon': 'bi-building',
+                'icon_color': '#f5576c',
+                'gradient_start': 'rgba(240, 147, 251, 0.1)',
+                'gradient_end': 'rgba(245, 87, 108, 0.1)',
+                'title': 'Aucun éditeur trouvé',
+                'message': 'Commencez par ajouter votre premier éditeur à la bibliothèque',
+                'action_url': path('app_editeur_new'),
+                'action_icon': 'bi-building-add',
+                'action_text': 'Ajouter un éditeur'
+            }) }}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

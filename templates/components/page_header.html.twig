@@ -1,0 +1,28 @@
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>{{ title }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                {% for item in breadcrumb %}
+                    {% if item.url is defined and item.url %}
+                        <li class="breadcrumb-item"><a href="{{ item.url }}">{{ item.label }}</a></li>
+                    {% else %}
+                        <li class="breadcrumb-item active">{{ item.label }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </nav>
+    </div>
+    {% if actions is defined %}
+        <div>
+            {% for action in actions %}
+                <a href="{{ action.url }}" class="btn {{ action.class|default('btn-outline-gradient') }} {{ action.margin|default('') }}">
+                    {% if action.icon %}<i class="bi {{ action.icon }} me-2"></i>{% endif %}
+                    {{ action.label }}
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

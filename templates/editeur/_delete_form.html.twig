@@ -1,0 +1,6 @@
+{{ include('components/delete_form.html.twig', {
+    'delete_url': path('app_editeur_delete', {'id': editeur.id}),
+    'entity_id': editeur.id,
+    'confirm_message': 'Êtes-vous sûr de vouloir supprimer cet éditeur ? Cette action est irréversible.',
+    'button_text': 'Supprimer l\'éditeur'
+}) }}

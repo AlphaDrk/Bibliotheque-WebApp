@@ -1,0 +1,21 @@
+<div class="card-header-modern">
+    <h2 class="card-title-modern">
+        {% if icon %}<i class="bi {{ icon }}"></i> {% endif %}{{ title }}
+    </h2>
+    {% if actions is defined %}
+        <div style="display: flex; gap: 10px;">
+            {% for action in actions %}
+                {% if action.type == 'button' %}
+                    <button class="icon-button" title="{{ action.title }}">
+                        <i class="bi {{ action.icon }}"></i>
+                    </button>
+                {% else %}
+                    <a href="{{ action.url }}" class="btn {{ action.class|default('btn-outline-gradient') }} btn-sm">
+                        {% if action.icon %}<i class="bi {{ action.icon }} me-1"></i>{% endif %}
+                        {{ action.label }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

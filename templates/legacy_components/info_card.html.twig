@@ -1,0 +1,25 @@
+<div class="card-modern mb-4">
+    <div class="card-header-modern">
+        <h2 class="card-title-modern">
+            <i class="bi bi-info-circle"></i> {{ title|default('Informations') }}
+        </h2>
+    </div>
+    <div class="card-body-modern">
+        {% for field in fields %}
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">{{ field.label }}</label>
+                {% if field.type == 'code' %}
+                    <code style="background: #f7f9fc; padding: 6px 12px; border-radius: 6px; font-size: 0.9rem; color: #667eea;">
+                        {{ field.value }}
+                    </code>
+                {% elseif field.type == 'badge' %}
+                    <span class="badge-modern" style="background: {{ field.badge_bg|default('rgba(79, 172, 254, 0.1)') }}; color: {{ field.badge_color|default('#4facfe') }};">
+                        {{ field.value }}
+                    </span>
+                {% else %}
+                    <div style="font-weight: 600; color: #1a1d2e; {{ field.style|default('') }}">{{ field.value }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>

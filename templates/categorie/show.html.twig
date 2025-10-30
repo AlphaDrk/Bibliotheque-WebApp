@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ categorie.destignation }} - Détails de la Catégorie{% endblock %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>{{ categorie.destignation }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_categorie_index') }}">Catégories</a></li>
+                <li class="breadcrumb-item active">{{ categorie.destignation }}</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-gradient me-2">
+            <i class="bi bi-pencil me-2"></i>
+            Modifier
+        </a>
+        <a href="{{ path('app_categorie_index') }}" class="btn btn-outline-gradient">
+            <i class="bi bi-arrow-left me-2"></i>
+            Retour à la liste
+        </a>
+    </div>
+</div>
+
+<!-- Category Details -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-info-circle"></i> Informations de la Catégorie
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">ID de la Catégorie</label>
+                            <code style="background: #f7f9fc; padding: 8px 15px; border-radius: 8px; font-size: 1rem; color: #667eea; font-weight: 600;">
+                                #{{ categorie.id }}
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Désignation</label>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #fa709a;">
+                                {{ categorie.destignation }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <!-- Category Icon -->
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-image"></i> Icône de la Catégorie
+                </h2>
+            </div>
+            <div class="card-body-modern text-center">
+                <div style="width: 150px; height: 150px; background: linear-gradient(135deg, #fa709a, #fee140); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 30px rgba(250, 112, 154, 0.3);">
+                    <i class="bi bi-tags" style="font-size: 4rem; color: white;"></i>
+                </div>
+                <p style="color: #8f9bb3; font-size: 0.9rem;">Catégorie de livres</p>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-lightning-charge"></i> Actions Rapides
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-gradient w-100">
+                        <i class="bi bi-pencil me-2"></i>
+                        Modifier la catégorie
+                    </a>
+                    <a href="{{ path('app_categorie_index') }}" class="btn btn-outline-gradient w-100">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        Retour à la liste
+                    </a>
+                    <div style="border-top: 1px solid #f0f2f5; padding-top: 15px; margin-top: 10px;">
+                        {{ include('categorie/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

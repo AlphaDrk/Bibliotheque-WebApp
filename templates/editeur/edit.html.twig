@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ editeur.nom }}{% endblock %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>Modifier {{ editeur.nom }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_editeur_index') }}">Éditeurs</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_editeur_show', {'id': editeur.id}) }}">{{ editeur.nom }}</a></li>
+                <li class="breadcrumb-item active">Modifier</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="{{ path('app_editeur_show', {'id': editeur.id}) }}" class="btn btn-outline-gradient me-2">
+            <i class="bi bi-eye me-2"></i>
+            Voir les détails
+        </a>
+        <a href="{{ path('app_editeur_index') }}" class="btn btn-outline-gradient">
+            <i class="bi bi-arrow-left me-2"></i>
+            Retour à la liste
+        </a>
+    </div>
+</div>
+
+<!-- Form -->
+<div class="row">
+    <div class="col-lg-8 col-xl-6">
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-pencil"></i> Modifier les Informations
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                {{ include('editeur/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 col-xl-6">
+        <!-- Publisher Info Card -->
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-info-circle"></i> Informations Actuelles
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Nom</label>
+                    <div style="font-weight: 600; color: #1a1d2e;">{{ editeur.nom }}</div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Pays</label>
+                    <span class="badge-modern" style="background: rgba(79, 172, 254, 0.1); color: #4facfe;">
+                        {{ editeur.pays }}
+                    </span>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Téléphone</label>
+                    <div style="font-weight: 500; color: #1a1d2e;">{{ editeur.telephone }}</div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">ID</label>
+                    <code style="background: #f7f9fc; padding: 6px 12px; border-radius: 6px; font-size: 0.9rem; color: #667eea;">
+                        #{{ editeur.id }}
+                    </code>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Danger Zone -->
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern" style="color: #f5576c;">
+                    <i class="bi bi-exclamation-triangle"></i> Zone de Danger
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <p style="color: #8f9bb3; font-size: 0.9rem; margin-bottom: 20px;">
+                    La suppression d'un éditeur est irréversible. Tous les livres associés à cet éditeur devront être réassignés.
+                </p>
+                {{ include('editeur/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

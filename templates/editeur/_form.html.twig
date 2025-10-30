@@ -1,0 +1,48 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom de l\'éditeur'}}) }}
+                {{ form_label(form.nom, 'Nom de l\'éditeur') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir un nom valide.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.pays, {'attr': {'class': 'form-control', 'placeholder': 'Pays'}}) }}
+                {{ form_label(form.pays, 'Pays') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir un pays valide.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.adresse, {'attr': {'class': 'form-control', 'placeholder': 'Adresse'}}) }}
+                {{ form_label(form.adresse, 'Adresse') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir une adresse valide.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Téléphone'}}) }}
+                {{ form_label(form.telephone, 'Téléphone') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir un téléphone valide.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{ include('components/form_actions.html.twig', {
+        'back_url': path('app_editeur_index'),
+        'button_label': button_label|default('Enregistrer')
+    }) }}
+{{ form_end(form) }}

@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ editeur.nom }} - Détails de l'Éditeur{% endblock %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>{{ editeur.nom }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_editeur_index') }}">Éditeurs</a></li>
+                <li class="breadcrumb-item active">{{ editeur.nom }}</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="{{ path('app_editeur_edit', {'id': editeur.id}) }}" class="btn btn-gradient me-2">
+            <i class="bi bi-pencil me-2"></i>
+            Modifier
+        </a>
+        <a href="{{ path('app_editeur_index') }}" class="btn btn-outline-gradient">
+            <i class="bi bi-arrow-left me-2"></i>
+            Retour à la liste
+        </a>
+    </div>
+</div>
+
+<!-- Publisher Details -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-info-circle"></i> Informations de l'Éditeur
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">ID de l'Éditeur</label>
+                            <code style="background: #f7f9fc; padding: 8px 15px; border-radius: 8px; font-size: 1rem; color: #667eea; font-weight: 600;">
+                                #{{ editeur.id }}
+                            </code>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Nom de l'Éditeur</label>
+                            <div style="font-size: 1.2rem; font-weight: 600; color: #1a1d2e;">{{ editeur.nom }}</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Pays</label>
+                            <span class="badge-modern" style="background: rgba(79, 172, 254, 0.1); color: #4facfe; font-size: 1.1rem; padding: 10px 20px;">
+                                {{ editeur.pays }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Adresse</label>
+                            <div style="font-size: 1.1rem; color: #1a1d2e; font-weight: 500;">
+                                {{ editeur.adresse }}
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Téléphone</label>
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: #1a1d2e; font-weight: 500;">
+                                <i class="bi bi-telephone" style="color: #667eea;"></i>
+                                <span>{{ editeur.telephone }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <!-- Publisher Logo Placeholder -->
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-image"></i> Logo de l'Éditeur
+                </h2>
+            </div>
+            <div class="card-body-modern text-center">
+                <div style="width: 200px; height: 200px; background: linear-gradient(135deg, #f093fb, #f5576c); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);">
+                    <i class="bi bi-building" style="font-size: 4rem; color: white;"></i>
+                </div>
+                <p style="color: #8f9bb3; font-size: 0.9rem;">Aucun logo disponible</p>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-lightning-charge"></i> Actions Rapides
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <a href="{{ path('app_editeur_edit', {'id': editeur.id}) }}" class="btn btn-gradient w-100">
+                        <i class="bi bi-pencil me-2"></i>
+                        Modifier l'éditeur
+                    </a>
+                    <a href="{{ path('app_editeur_index') }}" class="btn btn-outline-gradient w-100">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        Retour à la liste
+                    </a>
+                    <div style="border-top: 1px solid #f0f2f5; padding-top: 15px; margin-top: 10px;">
+                        {{ include('editeur/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<div class="card-modern">
+    <div class="card-header-modern">
+        <h2 class="card-title-modern" style="color: #f5576c;">
+            <i class="bi bi-exclamation-triangle"></i> Zone de Danger
+        </h2>
+    </div>
+    <div class="card-body-modern">
+        <p style="color: #8f9bb3; font-size: 0.9rem; margin-bottom: 20px;">
+            {{ warning_message|default('La suppression est irréversible. Toutes les données associées seront perdues.') }}
+        </p>
+        {{ include('components/delete_form.html.twig', {
+            'delete_url': delete_url,
+            'entity_id': entity_id,
+            'confirm_message': confirm_message,
+            'button_text': button_text
+        }) }}
+    </div>
+</div>

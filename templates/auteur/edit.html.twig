@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ auteur.prenom }} {{ auteur.nom }}{% endblock %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>Modifier {{ auteur.prenom }} {{ auteur.nom }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_auteur_index') }}">Auteurs</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_auteur_show', {'id': auteur.id}) }}">{{ auteur.prenom }} {{ auteur.nom }}</a></li>
+                <li class="breadcrumb-item active">Modifier</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="{{ path('app_auteur_show', {'id': auteur.id}) }}" class="btn btn-outline-gradient me-2">
+            <i class="bi bi-eye me-2"></i>
+            Voir les détails
+        </a>
+        <a href="{{ path('app_auteur_index') }}" class="btn btn-outline-gradient">
+            <i class="bi bi-arrow-left me-2"></i>
+            Retour à la liste
+        </a>
+    </div>
+</div>
+
+<!-- Form -->
+<div class="row">
+    <div class="col-lg-8 col-xl-6">
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-pencil"></i> Modifier les Informations
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                {{ include('auteur/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 col-xl-6">
+        <!-- Author Info Card -->
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-info-circle"></i> Informations Actuelles
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Prénom</label>
+                    <div style="font-weight: 600; color: #1a1d2e;">{{ auteur.prenom }}</div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Nom</label>
+                    <div style="font-weight: 600; color: #1a1d2e;">{{ auteur.nom }}</div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Nom Complet</label>
+                    <div style="font-weight: 600; color: #4facfe; font-size: 1.1rem;">{{ auteur.prenom }} {{ auteur.nom }}</div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">ID</label>
+                    <code style="background: #f7f9fc; padding: 6px 12px; border-radius: 6px; font-size: 0.9rem; color: #667eea;">
+                        #{{ auteur.id }}
+                    </code>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Danger Zone -->
+        {{ include('components/danger_zone.html.twig', {
+            'warning_message': 'La suppression d\'un auteur est irréversible. Tous les livres associés à cet auteur devront être réassignés.',
+            'delete_url': path('app_auteur_delete', {'id': auteur.id}),
+            'entity_id': auteur.id,
+            'confirm_message': 'Êtes-vous sûr de vouloir supprimer cet auteur ? Cette action est irréversible.',
+            'button_text': 'Supprimer l\'auteur'
+        }) }}
+    </div>
+</div>
+{% endblock %}

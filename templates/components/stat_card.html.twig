@@ -1,0 +1,17 @@
+<div class="stat-card {{ card_class|default('') }}">
+    <div class="stat-card-header">
+        <div>
+            <div class="stat-value">{{ value }}</div>
+            <div class="stat-label">{{ label }}</div>
+            {% if change is defined %}
+                <div class="stat-change {{ change.type|default('positive') }}">
+                    <i class="bi bi-arrow-{{ change.direction|default('up') }}"></i>
+                    <span>{{ change.text }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="stat-icon">
+            <i class="bi {{ icon }}" style="color: {{ icon_color|default('#667eea') }};"></i>
+        </div>
+    </div>
+</div>

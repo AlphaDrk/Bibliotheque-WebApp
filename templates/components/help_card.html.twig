@@ -1,0 +1,20 @@
+<div class="card-modern">
+    <div class="card-header-modern">
+        <h2 class="card-title-modern">
+            <i class="bi bi-info-circle"></i> Aide
+        </h2>
+    </div>
+    <div class="card-body-modern">
+        {% for help_item in help_items %}
+            <div style="margin-bottom: 20px;">
+                <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                    {% if help_item.icon %}<i class="bi {{ help_item.icon }} me-2" style="color: {{ help_item.icon_color|default('#4facfe') }};"></i>{% endif %}
+                    {{ help_item.title }}
+                </h6>
+                <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                    {{ help_item.description }}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+</div>

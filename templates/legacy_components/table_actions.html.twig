@@ -1,0 +1,16 @@
+<div style="display: flex; gap: 10px;">
+    {% for action in actions %}
+        {% if action.type == 'button' %}
+            <button class="icon-button" title="{{ action.title }}">
+                <i class="bi {{ action.icon }}"></i>
+            </button>
+        {% else %}
+            <a href="{{ action.url }}" 
+               class="icon-button" 
+               style="width: 35px; height: 35px;" 
+               title="{{ action.title }}">
+                <i class="bi {{ action.icon }}"></i>
+            </a>
+        {% endif %}
+    {% endfor %}
+</div>

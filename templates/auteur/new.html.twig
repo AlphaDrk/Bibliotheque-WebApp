@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Auteur{% endblock %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>Nouvel Auteur</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_auteur_index') }}">Auteurs</a></li>
+                <li class="breadcrumb-item active">Nouvel Auteur</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="{{ path('app_auteur_index') }}" class="btn btn-outline-gradient">
+            <i class="bi bi-arrow-left me-2"></i>
+            Retour à la liste
+        </a>
+    </div>
+</div>
+
+<!-- Form -->
+<div class="row">
+    <div class="col-lg-8 col-xl-6">
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-plus-circle"></i> Informations de l'Auteur
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                {{ include('auteur/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 col-xl-6">
+        <!-- Help Card -->
+        {{ include('components/help_card.html.twig', {
+            'help_items': [
+                {
+                    'icon': 'bi-person',
+                    'icon_color': '#4facfe',
+                    'title': 'Prénom de l\'auteur',
+                    'description': 'Saisissez le prénom de l\'auteur tel qu\'il apparaît habituellement.'
+                },
+                {
+                    'icon': 'bi-person-badge',
+                    'icon_color': '#4facfe',
+                    'title': 'Nom de famille',
+                    'description': 'Saisissez le nom de famille de l\'auteur.'
+                },
+                {
+                    'icon': 'bi-lightbulb',
+                    'icon_color': '#4facfe',
+                    'title': 'Conseils',
+                    'description': 'Utilisez la forme la plus courante du nom de l\'auteur pour faciliter la recherche.'
+                },
+                {
+                    'icon': 'bi-book',
+                    'icon_color': '#4facfe',
+                    'title': 'Utilisation',
+                    'description': 'Cet auteur pourra être assigné aux livres pour faciliter leur organisation.'
+                }
+            ]
+        }) }}
+    </div>
+</div>
+{% endblock %}

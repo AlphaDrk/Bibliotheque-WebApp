@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ livre.titre }} - Détails du Livre{% endblock %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>{{ livre.titre }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_livre_index') }}">Livres</a></li>
+                <li class="breadcrumb-item active">{{ livre.titre }}</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="{{ path('app_livre_edit', {'id': livre.id}) }}" class="btn btn-gradient me-2">
+            <i class="bi bi-pencil me-2"></i>
+            Modifier
+        </a>
+        <a href="{{ path('app_livre_index') }}" class="btn btn-outline-gradient">
+            <i class="bi bi-arrow-left me-2"></i>
+            Retour à la liste
+        </a>
+    </div>
+</div>
+
+<!-- Book Details -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-info-circle"></i> Informations du Livre
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">ID du Livre</label>
+                            <code style="background: #f7f9fc; padding: 8px 15px; border-radius: 8px; font-size: 1rem; color: #667eea; font-weight: 600;">
+                                #{{ livre.id }}
+                            </code>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Titre</label>
+                            <div style="font-size: 1.2rem; font-weight: 600; color: #1a1d2e;">{{ livre.titre }}</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">ISBN</label>
+                            <code style="background: #f7f9fc; padding: 8px 15px; border-radius: 8px; font-size: 1rem; color: #667eea; font-weight: 600;">
+                                {{ livre.isbn }}
+                            </code>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Éditeur</label>
+                            <div style="font-size: 1.1rem; color: #1a1d2e; font-weight: 500;">
+                                {{ livre.editeur ? livre.editeur.nom : '—' }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Quantité en Stock</label>
+                            <span class="badge-modern" style="background: {{ livre.qte > 10 ? 'rgba(79, 172, 254, 0.1)' : 'rgba(245, 87, 108, 0.1)' }}; color: {{ livre.qte > 10 ? '#4facfe' : '#f5576c' }}; font-size: 1.1rem; padding: 10px 20px;">
+                                {{ livre.qte }} unité{{ livre.qte > 1 ? 's' : '' }}
+                            </span>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Prix Unitaire</label>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #667eea;">
+                                {{ livre.pu|number_format(2, ',', ' ') }} €
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Date de Publication</label>
+                            <div style="font-size: 1.1rem; color: #1a1d2e; font-weight: 500;">
+                                {{ livre.datpub ? livre.datpub|date('d/m/Y') : 'Non spécifiée' }}
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Catégorie</label>
+                            <div style="font-size: 1.1rem; color: #1a1d2e; font-weight: 500;">
+                                {{ livre.categorie ? livre.categorie.destignation : '—' }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <!-- Book Cover Placeholder -->
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-image"></i> Couverture
+                </h2>
+            </div>
+            <div class="card-body-modern text-center">
+                <div style="width: 200px; height: 280px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+                    <i class="bi bi-book" style="font-size: 4rem; color: white;"></i>
+                </div>
+                <p style="color: #8f9bb3; font-size: 0.9rem;">Aucune image de couverture disponible</p>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-lightning-charge"></i> Actions Rapides
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <a href="{{ path('app_livre_edit', {'id': livre.id}) }}" class="btn btn-gradient w-100">
+                        <i class="bi bi-pencil me-2"></i>
+                        Modifier le livre
+                    </a>
+                    <a href="{{ path('app_livre_index') }}" class="btn btn-outline-gradient w-100">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        Retour à la liste
+                    </a>
+                    <div style="border-top: 1px solid #f0f2f5; padding-top: 15px; margin-top: 10px;">
+                        {{ include('livre/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-modern mt-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-people"></i> Auteurs
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                {% if livre.auteurs|length > 0 %}
+                    <ul class="list-unstyled" style="margin:0;">
+                        {% for a in livre.auteurs %}
+                            <li style="padding:6px 0;">{{ a.prenom }} {{ a.nom }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div style="color:#8f9bb3;">Aucun auteur associé</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

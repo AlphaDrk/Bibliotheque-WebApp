@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ auteur.prenom }} {{ auteur.nom }} - Détails de l'Auteur{% endblock %}
+
+{% block body %}
+{{ include('components/page_header.html.twig', {
+    'title': auteur.prenom ~ ' ' ~ auteur.nom,
+    'breadcrumb': [
+        {'label': 'Auteurs', 'url': path('app_auteur_index')},
+        {'label': auteur.prenom ~ ' ' ~ auteur.nom}
+    ],
+    'actions': [
+        {
+            'url': path('app_auteur_edit', {'id': auteur.id}),
+            'class': 'btn-gradient',
+            'icon': 'bi-pencil',
+            'label': 'Modifier',
+            'margin': 'me-2'
+        },
+        {
+            'url': path('app_auteur_index'),
+            'class': 'btn-outline-gradient',
+            'icon': 'bi-arrow-left',
+            'label': 'Retour à la liste'
+        }
+    ]
+}) }}
+
+<!-- Author Details -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-info-circle"></i> Informations de l'Auteur
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">ID de l'Auteur</label>
+                            <code style="background: #f7f9fc; padding: 8px 15px; border-radius: 8px; font-size: 1rem; color: #667eea; font-weight: 600;">
+                                #{{ auteur.id }}
+                            </code>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Prénom</label>
+                            <div style="font-size: 1.2rem; font-weight: 600; color: #1a1d2e;">{{ auteur.prenom }}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Nom</label>
+                            <div style="font-size: 1.2rem; font-weight: 600; color: #1a1d2e;">{{ auteur.nom }}</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; font-weight: 600; color: #8f9bb3; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Nom Complet</label>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #4facfe;">
+                                {{ auteur.prenom }} {{ auteur.nom }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <!-- Author Avatar -->
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-image"></i> Photo de l'Auteur
+                </h2>
+            </div>
+            <div class="card-body-modern text-center">
+                <div style="width: 150px; height: 150px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+                    <div style="color: white; font-weight: 700; font-size: 3rem;">
+                        {{ auteur.prenom|slice(0, 1)|upper }}{{ auteur.nom|slice(0, 1)|upper }}
+                    </div>
+                </div>
+                <p style="color: #8f9bb3; font-size: 0.9rem;">Aucune photo disponible</p>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        {{ include('components/quick_actions.html.twig', {
+            'actions': [
+                {
+                    'url': path('app_auteur_edit', {'id': auteur.id}),
+                    'class': 'btn-gradient',
+                    'icon': 'bi-pencil',
+                    'label': 'Modifier l\'auteur'
+                },
+                {
+                    'url': path('app_auteur_index'),
+                    'class': 'btn-outline-gradient',
+                    'icon': 'bi-arrow-left',
+                    'label': 'Retour à la liste'
+                }
+            ],
+            'show_delete': true,
+            'delete_url': path('app_auteur_delete', {'id': auteur.id}),
+            'entity_id': auteur.id,
+            'confirm_message': 'Êtes-vous sûr de vouloir supprimer cet auteur ? Cette action est irréversible.',
+            'delete_button_text': 'Supprimer l\'auteur'
+        }) }}
+    </div>
+</div>
+{% endblock %}

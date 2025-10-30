@@ -1,0 +1,101 @@
+{# Footer partial: scripts and optional footer markup #}
+<footer class="site-footer">
+    <div class="container mt-4 text-center text-muted small">
+        &copy; {{ "now"|date("Y") }} Bibliothèque — Tous droits réservés
+    </div>
+</footer>
+
+{# Scripts: Bootstrap bundle + site behaviors (search dropdown, mobile toggle) #}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.querySelector('.navbar-toggler');
+        const sidebar = document.querySelector('.sidebar');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('mobile-open');
+            });
+        }
+
+        // Global search dropdown logic
+        const input = document.getElementById('global-search-input');
+        const dropdown = document.getElementById('global-search-dropdown');
+        let activeIndex = -1;
+
+        function hideDropdown() {
+            if (!dropdown) return;
+            dropdown.style.display = 'none';
+            dropdown.innerHTML = '';
+            activeIndex = -1;
+        }
+
+        function showDropdown(items) {
+            if (!dropdown) return;
+            if (!items.length) { hideDropdown(); return; }
+            dropdown.innerHTML = items.map((it, idx) => `
+                <a class="search-item${idx===0?' active':''}" href="${it.url}">
+                    <span>${it.label}</span>
+                    <small style="color:#8f9bb3;">${it.type}</small>
+                </a>
+            `).join('');
+            dropdown.style.display = 'block';
+            activeIndex = 0;
+        }
+
+        let abortCtrl = null;
+        let debounceTimer = null;
+        async function fetchSuggestions(q){
+            if (q.length < 2) { hideDropdown(); return; }
+            try {
+                if (abortCtrl) abortCtrl.abort();
+                abortCtrl = new AbortController();
+                const res = await fetch(`{{ path('app_search_suggestions') }}?q=` + encodeURIComponent(q), { signal: abortCtrl.signal });
+                if (!res.ok) return;
+                const data = await res.json();
+                showDropdown(data.items || []);
+            } catch (err) { /* ignore aborted */ }
+        }
+
+        input && input.addEventListener('input', (e) => {
+            const q = e.target.value.trim();
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => fetchSuggestions(q), 200);
+        });
+
+        input && input.addEventListener('focus', (e) => {
+            const q = e.target.value.trim();
+            if (q.length >= 2) fetchSuggestions(q);
+        });
+
+        input && input.addEventListener('keydown', (e) => {
+            if (!dropdown || dropdown.style.display === 'none') return;
+            const links = dropdown.querySelectorAll('.search-item');
+            if (!links.length) return;
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                activeIndex = (activeIndex + 1) % links.length;
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                activeIndex = (activeIndex - 1 + links.length) % links.length;
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                links[activeIndex].click();
+            } else if (e.key === 'Escape') {
+                hideDropdown();
+            } else {
+                return;
+            }
+            links.forEach((el, i) => el.classList.toggle('active', i === activeIndex));
+        });
+
+        document.addEventListener('click', (ev) => {
+            const container = document.getElementById('global-search');
+            if (!container) return;
+            if (!container.contains(ev.target)) hideDropdown();
+        });
+    });
+</script>
+
+{# Allow child templates to push additional scripts if needed #}
+{% block extra_scripts %}{% endblock %}

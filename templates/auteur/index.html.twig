@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Auteurs{% endblock %}
+
+{% block body %}
+{{ include('components/page_header.html.twig', {
+    'title': 'Gestion des Auteurs',
+    'breadcrumb': [
+        {'label': 'Auteurs'}
+    ],
+    'actions': [
+        {
+            'url': path('app_auteur_new'),
+            'class': 'btn-gradient',
+            'icon': 'bi-person-plus',
+            'label': 'Nouvel Auteur'
+        }
+    ]
+}) }}
+
+<!-- Stats Overview -->
+<div class="stats-grid mb-4">
+    {{ include('components/stat_card.html.twig', {
+        'value': auteurs|length,
+        'label': 'Total Auteurs',
+        'icon': 'bi-person-circle',
+        'icon_color': '#667eea'
+    }) }}
+</div>
+
+<!-- Authors Table -->
+<div class="card-modern">
+    {{ include('components/card_header.html.twig', {
+        'icon': 'bi-list',
+        'title': 'Liste des Auteurs',
+        'actions': [
+            {'type': 'button', 'icon': 'bi-funnel', 'title': 'Filtrer'},
+            {'type': 'button', 'icon': 'bi-download', 'title': 'Exporter'}
+        ]
+    }) }}
+    <div class="card-body-modern">
+        {% if auteurs|length > 0 %}
+            <div class="table-responsive">
+                <table class="table-modern">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>AUTEUR</th>
+                            <th>NOM COMPLET</th>
+                            <th>NOMBRE DE LIVRES</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for auteur in auteurs %}
+                            <tr>
+                                <td>
+                                    <code style="background: #f7f9fc; padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; color: #667eea;">
+                                        #{{ auteur.id }}
+                                    </code>
+                                </td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.1rem;">
+                                            {{ auteur.prenom|slice(0, 1)|upper }}{{ auteur.nom|slice(0, 1)|upper }}
+                                        </div>
+                                        <div>
+                                            <div style="font-weight: 600; color: #1a1d2e;">{{ auteur.prenom }}</div>
+                                            <div style="font-size: 0.85rem; color: #8f9bb3;">{{ auteur.nom }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <strong style="color: #1a1d2e;">{{ auteur.prenom }} {{ auteur.nom }}</strong>
+                                </td>
+                                <td>
+                                    <span class="badge-modern" style="background: rgba(102, 126, 234, 0.1); color: #667eea;">
+                                        {{ auteur.livres|length }} livre{{ auteur.livres|length > 1 ? 's' : '' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {{ include('components/action_buttons.html.twig', {
+                                        'actions': [
+                                            {
+                                                'url': path('app_auteur_show', {'id': auteur.id}),
+                                                'icon': 'bi-eye',
+                                                'title': 'Voir les détails'
+                                            },
+                                            {
+                                                'url': path('app_auteur_edit', {'id': auteur.id}),
+                                                'icon': 'bi-pencil',
+                                                'title': 'Modifier'
+                                            }
+                                        ]
+                                    }) }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            {{ include('components/empty_state.html.twig', {
+                'icon': 'bi-person-circle',
+                'icon_color': '#667eea',
+                'title': 'Aucun auteur trouvé',
+                'message': 'Commencez par ajouter votre premier auteur à la bibliothèque',
+                'action_url': path('app_auteur_new'),
+                'action_icon': 'bi-person-plus',
+                'action_text': 'Ajouter un auteur'
+            }) }}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

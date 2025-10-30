@@ -1,0 +1,27 @@
+<div class="card-modern">
+    <div class="card-header-modern">
+        <h2 class="card-title-modern">
+            <i class="bi bi-lightning-charge"></i> Actions Rapides
+        </h2>
+    </div>
+    <div class="card-body-modern">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            {% for action in actions %}
+                <a href="{{ action.url }}" class="btn {{ action.class|default('btn-gradient') }} w-100">
+                    {% if action.icon %}<i class="bi {{ action.icon }} me-2"></i>{% endif %}
+                    {{ action.label }}
+                </a>
+            {% endfor %}
+            {% if show_delete is defined and show_delete %}
+                <div style="border-top: 1px solid #f0f2f5; padding-top: 15px; margin-top: 10px;">
+                    {{ include('components/delete_form.html.twig', {
+                        'delete_url': delete_url,
+                        'entity_id': entity_id,
+                        'confirm_message': confirm_message,
+                        'button_text': delete_button_text
+                    }) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

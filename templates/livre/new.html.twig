@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Livre{% endblock %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>Nouveau Livre</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_livre_index') }}">Livres</a></li>
+                <li class="breadcrumb-item active">Nouveau Livre</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="{{ path('app_livre_index') }}" class="btn btn-outline-gradient">
+            <i class="bi bi-arrow-left me-2"></i>
+            Retour à la liste
+        </a>
+    </div>
+</div>
+
+<!-- Form -->
+<div class="row">
+    <div class="col-lg-8 col-xl-6">
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-plus-circle"></i> Informations du Livre
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                {{ include('livre/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 col-xl-6">
+        <!-- Help Card -->
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-info-circle"></i> Aide
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-book me-2" style="color: #667eea;"></i>
+                        Titre du livre
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Saisissez le titre complet du livre tel qu'il apparaît sur la couverture.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-upc-scan me-2" style="color: #667eea;"></i>
+                        Code ISBN
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Le code ISBN unique du livre (13 chiffres généralement).
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-box me-2" style="color: #667eea;"></i>
+                        Quantité
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Nombre d'exemplaires disponibles en stock.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-currency-euro me-2" style="color: #667eea;"></i>
+                        Prix unitaire
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Prix de vente d'un exemplaire en euros.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

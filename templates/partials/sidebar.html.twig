@@ -1,0 +1,42 @@
+{# Sidebar partial extracted from base.html.twig #}
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <a href="{{ path('app_accueil') }}" class="sidebar-brand">
+            <div class="brand-icon">
+                <i class="bi bi-book"></i>
+            </div>
+            <span>Bibliothèque</span>
+        </a>
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="nav-section-title">Menu Principal</div>
+
+        <a href="{{ path('app_accueil') }}" class="sidebar-link {% if app.request.get('_route') == 'app_accueil' %}active{% endif %}">
+            <i class="bi bi-house-door"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ path('app_livre_index') }}" class="sidebar-link {% if 'livre' in app.request.get('_route') %}active{% endif %}">
+            <i class="bi bi-book"></i>
+            <span>Livres</span>
+        </a>
+
+        <a href="{{ path('app_auteur_index') }}" class="sidebar-link {% if 'auteur' in app.request.get('_route') %}active{% endif %}">
+            <i class="bi bi-person-circle"></i>
+            <span>Auteurs</span>
+        </a>
+
+        <div class="nav-section-title">Gestion</div>
+
+        <a href="{{ path('app_categorie_index') }}" class="sidebar-link {% if 'categorie' in app.request.get('_route') %}active{% endif %}">
+            <i class="bi bi-tags"></i>
+            <span>Catégories</span>
+        </a>
+
+        <a href="{{ path('app_editeur_index') }}" class="sidebar-link {% if 'editeur' in app.request.get('_route') %}active{% endif %}">
+            <i class="bi bi-building"></i>
+            <span>Éditeurs</span>
+        </a>
+    </nav>
+</aside>

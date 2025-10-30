@@ -1,0 +1,100 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Titre du livre'}}) }}
+                {{ form_label(form.titre, 'Titre du livre') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir un titre valide.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.isbn, {'attr': {'class': 'form-control', 'placeholder': 'ISBN'}}) }}
+                {{ form_label(form.isbn, 'ISBN') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir un ISBN valide.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.qte, {'attr': {'class': 'form-control', 'placeholder': 'Quantité', 'min': '0'}}) }}
+                {{ form_label(form.qte, 'Quantité') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir une quantité valide.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.pu, {'attr': {'class': 'form-control', 'placeholder': 'Prix unitaire', 'step': '0.01', 'min': '0'}}) }}
+                {{ form_label(form.pu, 'Prix unitaire (€)') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir un prix valide.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.datpub, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(form.datpub, 'Date de publication') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir une date valide.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.editeur, {'attr': {'class': 'form-select'}}) }}
+                {{ form_label(form.editeur, 'Éditeur') }}
+                <div class="invalid-feedback">
+                    Veuillez sélectionner un éditeur.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.categorie, {'attr': {'class': 'form-select'}}) }}
+                {{ form_label(form.categorie, 'Catégorie (optionnelle)') }}
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <label class="form-label" style="font-weight:600; color:#8f9bb3;">Auteurs</label>
+        {{ form_widget(form.auteurs, {'attr': {'class': 'form-select', 'multiple': 'multiple', 'size': 6}}) }}
+        <div class="form-text">Maintenez Ctrl/Cmd pour sélectionner plusieurs auteurs.</div>
+    </div>
+
+    {{ include('components/form_actions.html.twig', {
+        'back_url': path('app_livre_index'),
+        'button_label': button_label|default('Enregistrer')
+    }) }}
+{{ form_end(form) }}
+
+<script>
+// Bootstrap form validation
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+</script>

@@ -1,0 +1,37 @@
+{# Header / Top bar partial extracted from base.html.twig #}
+<header class="top-bar">
+    <div style="display:flex; align-items:center; gap:12px;">
+        <button class="navbar-toggler icon-button" aria-label="Toggle menu">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <div class="search-bar" id="global-search">
+        <i class="bi bi-search"></i>
+        <input id="global-search-input" type="search" name="q" value="{{ q|default('') }}" autocomplete="off" placeholder="Rechercher un livre, un auteur ou un éditeur">
+        <div id="global-search-dropdown" class="search-dropdown" style="display:none;"></div>
+    </div>
+    </div>
+
+    <div class="top-bar-actions">
+        <button class="icon-button">
+            <i class="bi bi-bell"></i>
+            <span class="badge">3</span>
+        </button>
+
+        <button class="icon-button">
+            <i class="bi bi-gear"></i>
+        </button>
+
+        <button id="theme-toggle" class="icon-button" title="Toggle theme">
+            <i class="bi bi-moon"></i>
+        </button>
+
+        <div class="user-profile">
+            <div class="user-avatar">A</div>
+            <div>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #1a1d2e;">Admin</div>
+                <div style="font-size: 0.75rem; color: #8f9bb3;">Administrateur</div>
+            </div>
+        </div>
+    </div>
+</header>

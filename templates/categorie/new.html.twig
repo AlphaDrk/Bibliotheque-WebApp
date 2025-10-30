@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Catégorie{% endblock %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>Nouvelle Catégorie</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_categorie_index') }}">Catégories</a></li>
+                <li class="breadcrumb-item active">Nouvelle Catégorie</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="{{ path('app_categorie_index') }}" class="btn btn-outline-gradient">
+            <i class="bi bi-arrow-left me-2"></i>
+            Retour à la liste
+        </a>
+    </div>
+</div>
+
+<!-- Form -->
+<div class="row">
+    <div class="col-lg-8 col-xl-6">
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-plus-circle"></i> Informations de la Catégorie
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                {{ include('categorie/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 col-xl-6">
+        <!-- Help Card -->
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-info-circle"></i> Aide
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-tags me-2" style="color: #fa709a;"></i>
+                        Désignation de la catégorie
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Saisissez un nom descriptif pour votre catégorie (ex: "Roman", "Science-Fiction", "Histoire").
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-lightbulb me-2" style="color: #fa709a;"></i>
+                        Conseils
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Choisissez un nom court et clair qui permettra de classer facilement vos livres.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-book me-2" style="color: #fa709a;"></i>
+                        Utilisation
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Cette catégorie pourra être assignée aux livres pour faciliter leur organisation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

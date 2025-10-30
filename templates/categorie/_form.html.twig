@@ -1,0 +1,16 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+    <div class="mb-4">
+        <div class="form-floating">
+            {{ form_widget(form.destignation, {'attr': {'class': 'form-control', 'placeholder': 'Désignation de la catégorie'}}) }}
+            {{ form_label(form.destignation, 'Désignation de la catégorie') }}
+            <div class="invalid-feedback">
+                Veuillez saisir une désignation valide.
+            </div>
+        </div>
+    </div>
+    
+    {{ include('components/form_actions.html.twig', {
+        'back_url': path('app_categorie_index'),
+        'button_label': button_label|default('Enregistrer')
+    }) }}
+{{ form_end(form) }}

@@ -1,0 +1,6 @@
+{{ include('components/delete_form.html.twig', {
+    'delete_url': path('app_auteur_delete', {'id': auteur.id}),
+    'entity_id': auteur.id,
+    'confirm_message': 'Êtes-vous sûr de vouloir supprimer cet auteur ? Cette action est irréversible.',
+    'button_text': 'Supprimer l\'auteur'
+}) }}

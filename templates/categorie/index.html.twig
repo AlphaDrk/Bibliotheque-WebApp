@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Catégories{% endblock %}
+
+{% block body %}
+{{ include('components/page_header.html.twig', {
+    'title': 'Gestion des Catégories',
+    'breadcrumb': [
+        {'label': 'Catégories'}
+    ],
+    'actions': [
+        {
+            'url': path('app_categorie_new'),
+            'class': 'btn-gradient',
+            'icon': 'bi-tag',
+            'label': 'Nouvelle Catégorie'
+        }
+    ]
+}) }}
+
+<!-- Stats Overview -->
+<div class="stats-grid mb-4">
+    {{ include('components/stat_card.html.twig', {
+        'value': categories|length,
+        'label': 'Total Catégories',
+        'icon': 'bi-tags',
+        'icon_color': '#667eea'
+    }) }}
+</div>
+
+<!-- Categories Table -->
+<div class="card-modern">
+    {{ include('components/card_header.html.twig', {
+        'icon': 'bi-list',
+        'title': 'Liste des Catégories',
+        'actions': [
+            {'type': 'button', 'icon': 'bi-funnel', 'title': 'Filtrer'},
+            {'type': 'button', 'icon': 'bi-download', 'title': 'Exporter'}
+        ]
+    }) }}
+    <div class="card-body-modern">
+        {% if categories|length > 0 %}
+            <div class="table-responsive">
+                <table class="table-modern">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>CATÉGORIE</th>
+                            <th>DÉSIGNATION</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categorie in categories %}
+                            <tr>
+                                <td>
+                                    <code style="background: #f7f9fc; padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; color: #667eea;">
+                                        #{{ categorie.id }}
+                                    </code>
+                                </td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #fa709a, #fee140); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                                            <i class="bi bi-tags"></i>
+                                        </div>
+                                        <div>
+                                            <div style="font-weight: 600; color: #1a1d2e;">{{ categorie.destignation }}</div>
+                                            <div style="font-size: 0.85rem; color: #8f9bb3;">Catégorie de livres</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge-modern" style="background: rgba(250, 112, 154, 0.1); color: #fa709a; font-size: 1rem; padding: 8px 16px;">
+                                        {{ categorie.destignation }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {{ include('components/action_buttons.html.twig', {
+                                        'actions': [
+                                            {
+                                                'url': path('app_categorie_show', {'id': categorie.id}),
+                                                'icon': 'bi-eye',
+                                                'title': 'Voir les détails'
+                                            },
+                                            {
+                                                'url': path('app_categorie_edit', {'id': categorie.id}),
+                                                'icon': 'bi-pencil',
+                                                'title': 'Modifier'
+                                            }
+                                        ]
+                                    }) }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            {{ include('components/empty_state.html.twig', {
+                'icon': 'bi-tags',
+                'icon_color': '#fa709a',
+                'gradient_start': 'rgba(250, 112, 154, 0.1)',
+                'gradient_end': 'rgba(254, 225, 64, 0.1)',
+                'title': 'Aucune catégorie trouvée',
+                'message': 'Commencez par ajouter votre première catégorie de livres',
+                'action_url': path('app_categorie_new'),
+                'action_icon': 'bi-tag',
+                'action_text': 'Ajouter une catégorie'
+            }) }}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

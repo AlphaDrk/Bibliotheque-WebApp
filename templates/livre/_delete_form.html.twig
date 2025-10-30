@@ -1,0 +1,6 @@
+{{ include('components/delete_form.html.twig', {
+    'delete_url': path('app_livre_delete', {'id': livre.id}),
+    'entity_id': livre.id,
+    'confirm_message': 'Êtes-vous sûr de vouloir supprimer ce livre ? Cette action est irréversible.',
+    'button_text': 'Supprimer le livre'
+}) }}

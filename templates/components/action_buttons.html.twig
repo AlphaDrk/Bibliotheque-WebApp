@@ -1,0 +1,10 @@
+<div style="display: flex; gap: 8px;">
+    {% for action in actions %}
+        <a href="{{ action.url }}" 
+           class="icon-button" 
+           style="width: 35px; height: 35px;" 
+           title="{{ action.title }}">
+            <i class="bi {{ action.icon }}"></i>
+        </a>
+    {% endfor %}
+</div>

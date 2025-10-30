@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Éditeur{% endblock %}
+
+{% block body %}
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>Nouvel Éditeur</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('app_editeur_index') }}">Éditeurs</a></li>
+                <li class="breadcrumb-item active">Nouvel Éditeur</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <a href="{{ path('app_editeur_index') }}" class="btn btn-outline-gradient">
+            <i class="bi bi-arrow-left me-2"></i>
+            Retour à la liste
+        </a>
+    </div>
+</div>
+
+<!-- Form -->
+<div class="row">
+    <div class="col-lg-8 col-xl-6">
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-plus-circle"></i> Informations de l'Éditeur
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                {{ include('editeur/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 col-xl-6">
+        <!-- Help Card -->
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h2 class="card-title-modern">
+                    <i class="bi bi-info-circle"></i> Aide
+                </h2>
+            </div>
+            <div class="card-body-modern">
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-building me-2" style="color: #f5576c;"></i>
+                        Nom de l'éditeur
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Saisissez le nom officiel de la maison d'édition.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-geo-alt me-2" style="color: #f5576c;"></i>
+                        Pays
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Le pays où se trouve le siège social de l'éditeur.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-geo me-2" style="color: #f5576c;"></i>
+                        Adresse
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        L'adresse complète du siège social de l'éditeur.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h6 style="color: #1a1d2e; font-weight: 600; margin-bottom: 8px;">
+                        <i class="bi bi-telephone me-2" style="color: #f5576c;"></i>
+                        Téléphone
+                    </h6>
+                    <p style="color: #8f9bb3; font-size: 0.9rem; margin: 0;">
+                        Le numéro de téléphone principal de l'éditeur.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

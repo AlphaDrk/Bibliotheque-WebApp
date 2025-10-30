@@ -1,0 +1,27 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}}) }}
+                {{ form_label(form.prenom, 'Prénom') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir un prénom valide.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="form-floating">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+                {{ form_label(form.nom, 'Nom') }}
+                <div class="invalid-feedback">
+                    Veuillez saisir un nom valide.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{ include('components/form_actions.html.twig', {
+        'back_url': path('app_auteur_index'),
+        'button_label': button_label|default('Enregistrer')
+    }) }}
+{{ form_end(form) }}

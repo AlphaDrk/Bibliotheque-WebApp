@@ -1,0 +1,7 @@
+<form method="post" action="{{ delete_url }}" onsubmit="return confirm('{{ confirm_message|default('Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.') }}');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entity_id) }}">
+    <button class="btn-delete" type="submit">
+        <i class="bi bi-trash"></i>
+        {{ button_text|default('Supprimer') }}
+    </button>
+</form>
