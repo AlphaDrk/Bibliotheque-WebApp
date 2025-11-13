@@ -1,250 +1,108 @@
+{# Tailwind-based homepage layout #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard - Gestion de Bibliothèque{% endblock %}
+{% block title %}Accueil - Bibliothèque{% endblock %}
 
 {% block body %}
-<!-- Page Header -->
-<div class="page-header">
-    <div>
-        <h1>Dashboard</h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('app_accueil') }}">Accueil</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
+<!-- Navbar -->
+<header class="sticky top-0 z-50 bg-white shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <div class="flex items-center space-x-6">
+        <a href="{{ path('app_accueil') }}" class="text-lg font-semibold text-gray-800">Bibliotheque</a>
+        <nav class="hidden md:flex space-x-4">
+          <a href="{{ path('app_accueil') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md">Accueil</a>
+          <a href="{{ path('app_editeur_index') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md">Éditeurs</a>
+          <a href="{{ path('app_categorie_index') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md">Catégories</a>
+          <a href="{{ path('app_livre_index') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md">Livres</a>
         </nav>
+      </div>
+      <div class="flex items-center">
+        <a href="#" class="text-sm text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md">Connexion</a>
+      </div>
     </div>
-</div>
+  </div>
+</header>
 
-<!-- Stats Grid -->
-<div class="stats-grid">
-    <!-- Total Books Card -->
-    <div class="stat-card">
-        <div class="stat-card-header">
-            <div>
-                <div class="stat-value">{{ totalLivres }}</div>
-                <div class="stat-label">Total Livres</div>
-                <div class="stat-change positive">
-                    <i class="bi bi-arrow-up"></i>
-                    <span>12% ce mois</span>
-                </div>
-            </div>
-            <div class="stat-icon">
-                <i class="bi bi-book" style="color: #667eea;"></i>
-            </div>
-        </div>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Section: Categories -->
+  <section class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">Catégories</h2>
+      <a href="{{ path('app_categorie_index') }}" class="text-sm text-gray-500 hover:text-gray-700">Voir tout ➡</a>
     </div>
-
-    <!-- Authors Card -->
-    <div class="stat-card success">
-        <div class="stat-card-header">
-            <div>
-                <div class="stat-value">{{ totalAuteurs }}</div>
-                <div class="stat-label">Auteurs</div>
-                <div class="stat-change positive">
-                    <i class="bi bi-arrow-up"></i>
-                    <span>8% ce mois</span>
-                </div>
-            </div>
-            <div class="stat-icon">
-                <i class="bi bi-person-circle" style="color: #4facfe;"></i>
-            </div>
-        </div>
-    </div>
-
-    <!-- Categories Card -->
-    <div class="stat-card warning">
-        <div class="stat-card-header">
-            <div>
-                <div class="stat-value">{{ totalCategories }}</div>
-                <div class="stat-label">Catégories</div>
-                <div class="stat-change positive">
-                    <i class="bi bi-arrow-up"></i>
-                    <span>5% ce mois</span>
-                </div>
-            </div>
-            <div class="stat-icon">
-                <i class="bi bi-tags" style="color: #fa709a;"></i>
-            </div>
-        </div>
-    </div>
-
-    <!-- Publishers Card -->
-    <div class="stat-card danger">
-        <div class="stat-card-header">
-            <div>
-                <div class="stat-value">{{ totalEditeurs }}</div>
-                <div class="stat-label">Éditeurs</div>
-                <div class="stat-change positive">
-                    <i class="bi bi-arrow-up"></i>
-                    <span>3% ce mois</span>
-                </div>
-            </div>
-            <div class="stat-icon">
-                <i class="bi bi-building" style="color: #f5576c;"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Value Stock Card -->
-<div class="card-modern mb-4">
-    <div class="card-body-modern" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px;">
-        <div class="row align-items-center">
-            <div class="col">
-                <div style="color: rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">
-                    Valeur Totale du Stock
-                </div>
-                <div style="font-size: 2.5rem; font-weight: 700; color: white;">
-                    {{ valeurStock|number_format(2, ',', ' ') }} €
-                </div>
-                <div style="color: rgba(255,255,255,0.9); margin-top: 15px; font-size: 0.95rem;">
-                    <i class="bi bi-graph-up me-2"></i>
-                    Inventaire complet de la bibliothèque
-                </div>
-            </div>
-            <div class="col-auto">
-                <div style="width: 90px; height: 90px; background: rgba(255,255,255,0.2); border-radius: 20px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
-                    <i class="bi bi-currency-euro" style="font-size: 3.5rem; color: white;"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Quick Actions -->
-<div class="card-modern mb-4">
-    <div class="card-header-modern">
-        <h2 class="card-title-modern">
-            <i class="bi bi-lightning-charge"></i> Actions Rapides
-        </h2>
-    </div>
-    <div class="card-body-modern">
-        <div class="row g-3">
-            <div class="col-lg-3 col-md-6">
-                <a href="{{ path('app_livre_new') }}" class="btn btn-gradient w-100" style="padding: 18px;">
-                    <i class="bi bi-plus-circle me-2"></i>
-                    Nouveau Livre
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <a href="{{ path('app_auteur_new') }}" class="btn btn-gradient w-100" style="padding: 18px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);">
-                    <i class="bi bi-person-plus me-2"></i>
-                    Nouvel Auteur
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <a href="{{ path('app_categorie_new') }}" class="btn btn-gradient w-100" style="padding: 18px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); box-shadow: 0 4px 15px rgba(250, 112, 154, 0.3);">
-                    <i class="bi bi-tag me-2"></i>
-                    Nouvelle Catégorie
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <a href="{{ path('app_editeur_new') }}" class="btn btn-gradient w-100" style="padding: 18px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);">
-                    <i class="bi bi-building-add me-2"></i>
-                    Nouvel Éditeur
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Recent Books Section -->
-<div class="card-modern">
-    <div class="card-header-modern">
-        <h2 class="card-title-modern">
-            <i class="bi bi-clock-history"></i> Derniers Livres Ajoutés
-        </h2>
-        <a href="{{ path('app_livre_index') }}" class="btn btn-outline-gradient btn-sm">
-            Voir tous <i class="bi bi-arrow-right ms-1"></i>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+      {% for categorie in categories %}
+        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="flex items-center justify-center rounded-md bg-white shadow-sm hover:shadow-lg transition p-3 text-sm font-medium text-gray-700">
+          {{ categorie.nom }}
         </a>
+      {% else %}
+        <div class="text-gray-500">Aucune catégorie.</div>
+      {% endfor %}
     </div>
-    <div class="card-body-modern">
-        {% if derniersLivres|length > 0 %}
-            <div class="table-responsive">
-                <table class="table-modern">
-                    <thead>
-                        <tr>
-                            <th>TITRE</th>
-                            <th>ISBN</th>
-                            <th>QUANTITÉ</th>
-                            <th>PRIX UNITAIRE</th>
-                            <th>DATE PUBLICATION</th>
-                            <th>ACTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for livre in derniersLivres %}
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 12px;">
-                                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                                            <i class="bi bi-book" style="color: #667eea;"></i>
-                                        </div>
-                                        <div>
-                                            <strong style="display: block;">{{ livre.titre }}</strong>
-                                            {% if livre.auteurs|length > 0 %}
-                                                <small style="color: #8f9bb3;">
-                                                    {% for auteur in livre.auteurs %}
-                                                        {{ auteur.nom }}{% if not loop.last %}, {% endif %}
-                                                    {% endfor %}
-                                                </small>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <code style="background: #f7f9fc; padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; color: #667eea;">
-                                        {{ livre.isbn }}
-                                    </code>
-                                </td>
-                                <td>
-                                    <span class="badge-modern" style="background: {{ livre.qte > 10 ? 'rgba(79, 172, 254, 0.1)' : 'rgba(245, 87, 108, 0.1)' }}; color: {{ livre.qte > 10 ? '#4facfe' : '#f5576c' }};">
-                                        {{ livre.qte }} unité{{ livre.qte > 1 ? 's' : '' }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <strong style="color: #667eea; font-size: 1.05rem;">
-                                        {{ livre.pu|number_format(2, ',', ' ') }} €
-                                    </strong>
-                                </td>
-                                <td style="color: #8f9bb3;">
-                                    {{ livre.datpub ? livre.datpub|date('d/m/Y') : 'N/A' }}
-                                </td>
-                                <td>
-                                    <div style="display: flex; gap: 8px;">
-                                        <a href="{{ path('app_livre_show', {'id': livre.id}) }}" 
-                                           class="icon-button" 
-                                           style="width: 35px; height: 35px;" 
-                                           title="Voir les détails">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="{{ path('app_livre_edit', {'id': livre.id}) }}" 
-                                           class="icon-button" 
-                                           style="width: 35px; height: 35px;" 
-                                           title="Modifier">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% else %}
-            <div class="text-center py-5">
-                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
-                    <i class="bi bi-book" style="font-size: 3rem; color: #667eea;"></i>
-                </div>
-                <h4 style="color: #1a1d2e; margin-bottom: 10px;">Aucun livre dans la bibliothèque</h4>
-                <p style="color: #8f9bb3; margin-bottom: 25px;">Commencez par ajouter votre premier livre à la collection</p>
-                <a href="{{ path('app_livre_new') }}" class="btn btn-gradient">
-                    <i class="bi bi-plus-circle me-2"></i>
-                    Ajouter le premier livre
-                </a>
-            </div>
-        {% endif %}
+  </section>
+
+  <!-- Section: Éditeurs -->
+  <section class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">Éditeurs</h2>
+      <a href="{{ path('app_editeur_index') }}" class="text-sm text-gray-500 hover:text-gray-700">Voir tout ➡</a>
     </div>
-</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {% for editeur in editeurs %}
+        <a href="{{ path('app_editeur_show', {'id': editeur.id}) }}" class="flex items-center space-x-4 p-4 bg-white rounded-lg shadow hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-md bg-gray-100 flex items-center justify-center text-xl font-bold text-gray-600">
+            {{ editeur.nom[0]|upper }}
+          </div>
+          <div class="flex-1">
+            <div class="text-sm font-medium text-gray-800">{{ editeur.nom }}</div>
+            <div class="text-xs text-gray-500">{{ editeur.pays }}</div>
+          </div>
+        </a>
+      {% else %}
+        <div class="text-gray-500">Aucun éditeur.</div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Section: Derniers Livres Ajoutés -->
+  <section>
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">Derniers Livres Ajoutés</h2>
+      <a href="{{ path('app_livre_index') }}" class="text-sm text-gray-500 hover:text-gray-700">Voir tout ➡</a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for livre in derniersLivres %}
+        <div class="bg-white rounded-lg shadow hover:shadow-xl transition overflow-hidden">
+          <div class="relative h-48 bg-gray-50 flex items-center justify-center">
+            {# If you use VichUploader or store cover path, replace src accordingly #}
+            {% if livre.cover is defined and livre.cover %}
+              <img src="{{ livre.cover }}" alt="{{ livre.titre }}" class="object-cover w-full h-full" />
+            {% else %}
+              <div class="text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6l4 2" />
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-800 truncate">{{ livre.titre }}</h3>
+            {% if livre.auteurs|length > 0 %}
+              <p class="text-sm text-gray-500 mt-1">{{ livre.auteurs|map(a => (a.prenom ~ ' ' ~ a.nom))|join(', ') }}</p>
+            {% endif %}
+            <div class="mt-4 flex items-center justify-between">
+              <div class="text-indigo-600 font-semibold">{{ livre.pu|number_format(2, ',', ' ') }} €</div>
+              <a href="{{ path('app_livre_show', {'id': livre.id}) }}" class="inline-block px-3 py-1 rounded-md bg-indigo-600 text-white text-sm hover:bg-indigo-700">Détail</a>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="text-gray-500">Aucun livre récent.</div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
 {% endblock %}

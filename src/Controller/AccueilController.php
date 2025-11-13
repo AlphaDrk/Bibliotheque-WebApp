@@ -32,6 +32,9 @@ final class AccueilController extends AbstractController
         
         // Récupération des derniers livres
         $derniersLivres = $livreRepository->findBy([], ['id' => 'DESC'], 5);
+        // Liste des catégories et éditeurs pour la page d'accueil
+        $categories = $categorieRepository->findAll();
+        $editeurs = $editeurRepository->findAll();
         
         // Calcul de la valeur totale du stock
         $valeurStock = 0;
@@ -46,6 +49,8 @@ final class AccueilController extends AbstractController
             'totalCategories' => $totalCategories,
             'totalEditeurs' => $totalEditeurs,
             'derniersLivres' => $derniersLivres,
+            'categories' => $categories,
+            'editeurs' => $editeurs,
             'valeurStock' => $valeurStock,
             'q' => $q,
         ]);
